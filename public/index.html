@@ -19,6 +19,9 @@
             socket.on('welcome-message', (payload) => {
                 console.log(payload);
             });
+            setTimeout(() => {
+                socket.emit('client-message', {msg:'client',name:'Andy'});
+            }, 2000);
         </script>
     </body>
 </html>
