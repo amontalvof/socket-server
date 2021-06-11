@@ -26,19 +26,13 @@
                     />
                 </div>
                 <div class="col-4">
-                    <button class="btn btn-primary">Send</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </div>
             </div>
         </form>
         <div class="row">
             <div class="col">
-                <ul id="myMessages" class="mt-5">
-                    <li>Hello</li>
-                    <li>World</li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
+                <ul id="myMessages" class="mt-5"></ul>
             </div>
         </div>
         <script
@@ -52,8 +46,16 @@
             // HTML References
             const form = document.querySelector('#myForm');
             const messages = document.querySelector('#myMessages');
-            socket.on('welcome-message', (payload) => {
-                console.log(payload);
+            const txtMessage = document.querySelector('#txtMessage');
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const newMessage = txtMessage.value;
+                socket.emit('message-to-server', { text: newMessage });
+            });
+
+            socket.on('message-from-server', (data) => {
+                messages.innerHTML += `<li>${data.text}</li>`;
             });
         </script>
     </body>

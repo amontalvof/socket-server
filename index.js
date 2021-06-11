@@ -15,13 +15,9 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', (socket) => {
     console.log('Client connected!', socket.id);
 
-    socket.emit('welcome-message', {
-        msg: 'Welcome from server',
-        date: new Date(),
-    });
-
-    socket.on('client-message', (payload) => {
-        console.log(payload);
+    socket.on('message-to-server', (data) => {
+        console.log(data);
+        io.emit('message-from-server', data);
     });
 });
 
