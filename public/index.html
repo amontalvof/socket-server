@@ -4,10 +4,43 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+            crossorigin="anonymous"
+        />
         <title>MiniChat</title>
     </head>
-    <body>
-        <h1>MiniChat</h1>
+    <body class="container">
+        <h1 class="mt-5">MiniChat</h1>
+        <hr />
+        <form id="myForm" action="">
+            <div class="row">
+                <div class="col-8">
+                    <input
+                        type="text"
+                        id="txtMessage"
+                        placeholder="Message"
+                        class="form-control"
+                    />
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col">
+                <ul id="myMessages" class="mt-5">
+                    <li>Hello</li>
+                    <li>World</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
             integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
@@ -16,12 +49,12 @@
         ></script>
         <script>
             const socket = io('http://localhost:8080');
+            // HTML References
+            const form = document.querySelector('#myForm');
+            const messages = document.querySelector('#myMessages');
             socket.on('welcome-message', (payload) => {
                 console.log(payload);
             });
-            setTimeout(() => {
-                socket.emit('client-message', {msg:'client',name:'Andy'});
-            }, 2000);
         </script>
     </body>
 </html>
