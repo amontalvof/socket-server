@@ -10,31 +10,12 @@
             integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
             crossorigin="anonymous"
         />
-        <title>MiniChat</title>
+        <title>Socket Server</title>
     </head>
     <body class="container">
-        <h1 class="mt-5">MiniChat</h1>
+        <h1 class="mt-5">Access Denied</h1>
         <hr />
-        <form id="myForm" action="">
-            <div class="row">
-                <div class="col-8">
-                    <input
-                        type="text"
-                        id="txtMessage"
-                        placeholder="Message"
-                        class="form-control"
-                    />
-                </div>
-                <div class="col-4">
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </div>
-            </div>
-        </form>
-        <div class="row">
-            <div class="col">
-                <ul id="myMessages" class="mt-5"></ul>
-            </div>
-        </div>
+
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
             integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
@@ -42,23 +23,13 @@
             referrerpolicy="no-referrer"
         ></script>
         <script>
-            const socket = io(
-                'https://am-node-chat-socket-server.herokuapp.com/'
-            );
-            // HTML References
-            const form = document.querySelector('#myForm');
-            const messages = document.querySelector('#myMessages');
-            const txtMessage = document.querySelector('#txtMessage');
+            const socket = io('http://localhost:8080/');
 
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const newMessage = txtMessage.value;
-                socket.emit('message-to-server', { text: newMessage });
+            socket.on('connect', () => {
+                console.log('connected');
             });
 
-            socket.on('message-from-server', (data) => {
-                messages.innerHTML += `<li>${data.text}</li>`;
-            });
+            socket.on('message-from-server', (data) => {});
         </script>
     </body>
 </html>
