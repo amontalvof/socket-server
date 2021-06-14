@@ -1,4 +1,5 @@
 const path = require('path');
+const cors = require('cors');
 const colors = require('colors/safe');
 // Express Server
 const express = require('express');
@@ -21,6 +22,8 @@ class Server {
     middlewares() {
         // Display the public directory
         this.app.use(express.static(path.resolve(__dirname, '../public')));
+        // CORS
+        this.app.use(cors());
     }
 
     socketsConfiguration() {
