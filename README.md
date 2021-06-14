@@ -1,4 +1,4 @@
-# Websocket Server 2nd
+# Socket Server
 
 ## Technologies
 
