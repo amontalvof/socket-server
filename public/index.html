@@ -42,7 +42,9 @@
             referrerpolicy="no-referrer"
         ></script>
         <script>
-            const socket = io('http://localhost:8080');
+            const socket = io(
+                'https://am-node-chat-socket-server.herokuapp.com/'
+            );
             // HTML References
             const form = document.querySelector('#myForm');
             const messages = document.querySelector('#myMessages');
